@@ -1,7 +1,6 @@
-import React, { Component, useState, setState } from 'react';
+import React, { Component} from 'react';
 import {
-    View, Text, StyleSheet, StatusBar, AppRegistry,
-    TouchableWithoutFeedback, Dimensions, Modal, FlatList
+    View, Text, StyleSheet, StatusBar, AppRegistry, Dimensions
 } from 'react-native';
 
 import { createAppContainer } from 'react-navigation';
@@ -12,70 +11,27 @@ import Post from './Post';
 import Messages from './Messages';
 import User from './User';
 
-import ImageElement from './ImageElement';
+import MainCarousel from './MainCarousel';
+
+const images = [
+    require('../../assets/IMG1.jpg'),
+    require('../../assets/IMG2.jpg'),
+    require('../../assets/IMG3.jpg'),
+    require('../../assets/IMG1.jpg'),
+    require('../../assets/IMG2.jpg'),
+]
 
 class Main extends Component {
-    static navigationOptions = {
-        title: 'Título',
-    };
-
-    state = {
-        modalVisible: false,
-        modalVisible: require('../../assets/IMG1.jpg'),
-        images: [
-            require('../../assets/IMG1.jpg'),
-            require('../../assets/IMG2.jpg'),
-            require('../../assets/IMG3.jpg'),
-            require('../../assets/IMG4.jpg'),
-            require('../../assets/IMG1.jpg'),
-            require('../../assets/IMG4.jpg'),
-        ]
-    }
-
-    setModalVisible(visible, imageKey) {
-        this.setState({ modalImage: this.state.images[imageKey] });
-        this.setState({ modalVisible: visible });
-    }
-
-    getImage() {
-        return this.state.modalImage;
-    }
-
     render() {
-        let images = this.state.images.map((val, key) => {
-            return <TouchableWithoutFeedback key={key} onPress={() => { this.setModalVisible(true, key) }} >
-                
-                <View style={styles.imagewrap}>
-
-                    <ImageElement imgsource={val}></ImageElement>
-                </View>
-            </TouchableWithoutFeedback>
-        });
-
         return (
             <>
-                <StatusBar barStyle='light-content' backgroundColor={'#46084A'} />
+                <StatusBar barStyle='light-content' backgroundColor={'#46084A'}/>
                 <View style={styles.mainHeader}>
                     <Text style={styles.mainTitle}>Seja Bem Vindo(a)</Text>
-                </View>               
+                </View>
+
                 <View style={styles.container}>
-                    
-                    <Modal style={styles.modalImage}
-                        animationType={'fade'}
-                        transparent={true}
-                        visible={this.state.modalVisible}
-                        onRequestClose={() => { }}>
-                        
-                        <View style={styles.modalContainer}>
-                            <Text style={styles.textModal}
-                                onPress={() => { this.setModalVisible(false) }}>Fechar
-                            </Text>
-
-                            <ImageElement imgsource={this.state.modalImage}/>
-                        </View>
-
-                    </Modal>    
-                   {images}
+                    <MainCarousel images={images} />
                 </View>
             </>
         )
@@ -201,3 +157,68 @@ const TabNavigator = createMaterialBottomTabNavigator({
 });
 
 export default createAppContainer(TabNavigator);
+
+/*
+state = {
+        modalVisible: false,
+        modalVisible: require('../../assets/IMG1.jpg'),
+        images: [
+            require('../../assets/IMG1.jpg'),
+            require('../../assets/IMG2.jpg'),
+            require('../../assets/IMG3.jpg'),
+            require('../../assets/IMG4.jpg'),
+            require('../../assets/IMG1.jpg'),
+      this.setState({ modalImage: this.state.images[imageKey] });
+        this.setState({ modalVisible: visible });
+    }
+
+    getImage() {
+        return this.state.modalImage;
+    }        require('../../assets/IMG4.jpg'),
+        ]
+    }
+
+    setModalVisible(visible, imageKey) {
+      
+
+    render() {
+        let images = this.state.images.map((val, key) => {
+            return <TouchableWithoutFeedback key={key} onPress={() => { this.setModalVisible(true, key) }} >
+
+                <View style={styles.imagewrap}>
+                    <ImageElement imgsource={val}></ImageElement>
+                </View>
+            </TouchableWithoutFeedback>
+        });
+
+        return (
+            <>
+                <StatusBar barStyle='light-content' backgroundColor={'#46084A'} />
+                <View style={styles.mainHeader}>
+                    <Text style={styles.mainTitle}>Seja Bem Vindo(a)</Text>
+                </View>
+
+                <View style={styles.container}>
+                    <Modal style={styles.modalImage}
+                        animationType={'fade'}
+                        transparent={true}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => { }}>
+
+                        <View style={styles.modalContainer}>
+                            <Text style={styles.textModal}
+                                onPress={() => { this.setModalVisible(false) }}>Fechar
+                            </Text>
+
+                            <ImageElement imgsource={this.state.modalImage}/>
+                        </View>
+
+                    </Modal>
+                    {images}
+                </View>
+            </>
+        )
+    }
+}
+
+*/

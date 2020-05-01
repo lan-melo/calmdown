@@ -15,7 +15,9 @@ export default function Post() {
         setModalOpen(false);
     }
     const [reviews, setReviews] = useState([
+        
     ]);
+    
     return (
         <>
             <View style={styles.mainHeader}>
