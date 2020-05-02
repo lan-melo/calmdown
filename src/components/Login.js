@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        top: 25,
-        
+        top: 25       
     },
 
     perfilText: {
