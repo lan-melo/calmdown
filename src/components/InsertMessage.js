@@ -3,39 +3,38 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Dimensions } from 
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-const reviewSchema = yup.object ({
+const reviewSchema = yup.object({
     body: yup.string()
         .required()
         .min(5),
 });
 
-export default function InsertPost({ addReview }) {
-    return (    
+export default function InsertMessage({ addMessage }) {
+    return (
         <View style={styles.container}>
-            <Formik
-                initialValues={{ user: 'UserTeste', body: '' }}
+            <Formik initialValues={{ user: 'UserTeste', body: '' }}
                 validationSchema={reviewSchema}
                 onSubmit={(values, actions) => {
-                actions.resetForm();
-                addReview(values);
-            }}>
+                    actions.resetForm();
+                    addMessage(values);
+                }}>
                 {(props) => (
                     <View >
                         <TextInput style={styles.inputPost}
-                            placeholder='O que você está pensando...'
+                            placeholder='Digite sua mensagem de apoio...'
                             numberOfLines={10}
                             alignItems='flex-start'
                             multiline={true}
                             onChangeText={props.handleChange('body')}
                             value={props.values.body}
                             onBlur={props.handleBlur('body')}
-                        />                 
+                        />
 
                         <TouchableOpacity onPress={props.handleSubmit} style={styles.buttonPost}>
                             <Text style={styles.textButton}>Enviar</Text>
-                        </TouchableOpacity>                
+                        </TouchableOpacity>
                     </View>
-             )}
+                )}
             </Formik>
         </View>
     )
@@ -77,14 +76,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textTransform: "uppercase"
     },
-    
+
     errorPostMessage: {
         color: '#FF0000',
         marginTop: 10,
         fontWeight: 'bold'
     }
 })
-
-/*
-<Text style={styles.errorPostMessage}>{props.touched.body && props.errors.body}</Text>
-*/

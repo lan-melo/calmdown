@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 
 export default class Messages extends Component {
-    render() {
+
+    render() { 
         return (
             <>
                 <View style={styles.mainHeader}>
@@ -10,7 +11,18 @@ export default class Messages extends Component {
                 </View> 
 
                 <View style={styles.container}>
-                    
+                    <FlatList
+                        data={message}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity style={styles.postContainer}>
+                                <View style={styles.postHeader}>
+                                    <Icon name='account-circle' size={36} iconStyle={{ color: '#A8A8A8' }} />
+                                    <Text style={styles.postTitle}>{item.user}</Text>
+                                </View>
+                                <Text style={styles.postBody}>{item.body}</Text>
+                            </TouchableOpacity>
+                        )}
+                    />
                 </View>
             </>
         )
